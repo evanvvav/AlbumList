@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Albums</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1> Albums</h1>
+	<table>	
+		<tbody>
+			<tr>
+			<th>Title</th>
+			<th>Artist</th>
+			<th>Songs</th>
+			<th>Year</th>
+			<tr/>	
+		<tr th:each = "album : ${albums}">
+		<td th:text="${album.title}"></td>
+		<td th:text="${album.artist}"></td>
+		<td th:text="${album.songs}"></td>
+		<td th:text="${album.year}"></td>
+			
+			<tr/>
+		</tbody>
+	</table>	
+
+			
+	
+	
+    
+</body>
+</html>
