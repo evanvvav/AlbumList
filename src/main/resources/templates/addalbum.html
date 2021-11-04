@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Albums</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+
+	<h1> Add/Edit album </h1>
+	<form th:object="${album}" th:action="@{/save}" action="#" method="post">
+	<table>	
+		<tbody>
+		<input type="hidden" th:field="${album.id}"/>
+		<tr><td>Title: </td><td><input type="text" th:field="${album.title}" /></td></tr>
+		<tr><td>Artist: </td><td><input type="text" th:field="${album.artist}" /></td></tr>
+		<tr><td>Songs: </td><td><input type="text" th:field="${album.songs}" /></td></tr>
+		<tr><td>Year: </td><td><input type="text" th:field="${album.year}" /></td></tr>
+			
+		</tbody>
+	</table>	
+	<input type="submit" value="Save"/>
+	</form>
+			
+	
+	
+    
+</body>
+</html>

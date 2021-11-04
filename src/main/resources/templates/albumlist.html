@@ -20,10 +20,13 @@
 		<td th:text="${album.artist}"></td>
 		<td th:text="${album.songs}"></td>
 		<td th:text="${album.year}"></td>
+		<td><a th:href ="@{/delete/{id}(id=${album.id})}">Delete</a></td>
+		<td><a th:href ="@{/edit/{id}(id=${album.id})}">Edit</a></td>
 			
 			<tr/>
 		</tbody>
 	</table>	
+		<a href="/add">Add Album</a>
 
 			
 	

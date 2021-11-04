@@ -43,4 +43,30 @@ public class AlbumController {
 
 	}
 
+	@RequestMapping(value = "/add")
+	public String addAlbum(Model model) {
+		model.addAttribute("album", new Album());
+		return "addalbum";
+
+	}
+
+	@RequestMapping(value = "/delete/{id}")
+	public String deleteAlbum(@PathVariable("id") Long albumId) {
+		repository.deleteById(albumId);
+		return "redirect:/albumlist";
+
+	}
+
+	@RequestMapping(value = "/edit/{id}")
+	public String editBook(@PathVariable("id") Long albumId, Model model) {
+		model.addAttribute("album", repository.findById(albumId));
+		return "addalbum";
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(Album album) {
+		repository.save(album);
+		return "redirect:/albumlist";
+	}
+
 }
