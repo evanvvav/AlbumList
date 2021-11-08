@@ -9,6 +9,8 @@ import com.example.Harjoitustyo.domain.Album;
 import com.example.Harjoitustyo.domain.AlbumRepository;
 import com.example.Harjoitustyo.domain.Genre;
 import com.example.Harjoitustyo.domain.GenreRepository;
+import com.example.Harjoitustyo.domain.Review;
+import com.example.Harjoitustyo.domain.ReviewRepository;
 
 @SpringBootApplication
 public class HarjoitustyoApplication {
@@ -18,7 +20,8 @@ public class HarjoitustyoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(AlbumRepository repository, GenreRepository genreRepository) {
+	public CommandLineRunner demo(AlbumRepository repository, GenreRepository genreRepository,
+			ReviewRepository reviewRepository) {
 		return (args) -> {
 
 			genreRepository.save(new Genre("Pop"));
@@ -30,11 +33,14 @@ public class HarjoitustyoApplication {
 			genreRepository.save(new Genre("Country"));
 			genreRepository.save(new Genre("Classical music"));
 
-			repository.save(new Album("Title 1", "Artist 1", 8, 2021, genreRepository.findByName("Pop").get(0)));
-			repository
-					.save(new Album("Title 2", "Artist 2", 4, 1999, genreRepository.findByName("Alternative").get(0)));
-			repository.save(
-					new Album("Title 3", "Artist 3", 2, 2017, genreRepository.findByName("Classical music").get(0)));
+			reviewRepository.save(new Review("Rate"));
+
+			repository.save(new Album("Title 1", "Artist 1", 8, 2021, genreRepository.findByName("Pop").get(0),
+					reviewRepository.findByName("Rate").get(0)));
+			repository.save(new Album("Title 2", "Artist 2", 4, 1999, genreRepository.findByName("Alternative").get(0),
+					reviewRepository.findByName("Rate").get(0)));
+			repository.save(new Album("Title 3", "Artist 3", 2, 2017,
+					genreRepository.findByName("Classical music").get(0), reviewRepository.findByName("Rate").get(0)));
 		};
 	}
 }

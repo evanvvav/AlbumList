@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.Harjoitustyo.domain.Album;
 import com.example.Harjoitustyo.domain.AlbumRepository;
 import com.example.Harjoitustyo.domain.GenreRepository;
+import com.example.Harjoitustyo.domain.ReviewRepository;
 
 @Controller
 public class AlbumController {
@@ -24,6 +25,9 @@ public class AlbumController {
 
 	@Autowired
 	private GenreRepository genreRepository;
+
+	@Autowired
+	private ReviewRepository reviewRepository;
 
 	@RequestMapping(value = "/albumlist")
 	public String muiscList(Model model) {
@@ -51,6 +55,7 @@ public class AlbumController {
 	public String addAlbum(Model model) {
 		model.addAttribute("album", new Album());
 		model.addAttribute("genres", genreRepository.findAll());
+		model.addAttribute("review", reviewRepository.findAll());
 		return "addalbum";
 
 	}
@@ -66,6 +71,7 @@ public class AlbumController {
 	public String editBook(@PathVariable("id") Long albumId, Model model) {
 		model.addAttribute("album", repository.findById(albumId));
 		model.addAttribute("genres", genreRepository.findAll());
+		model.addAttribute("review", reviewRepository.findAll());
 		return "addalbum";
 	}
 

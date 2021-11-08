@@ -15,6 +15,7 @@
 			<th>Songs</th>
 			<th>Year</th>
 			<th>Genre</th>
+			<th>Rate</th>
 			<tr/>	
 		<tr th:each = "album : ${albums}">
 		<td th:text="${album.title}"></td>
@@ -22,6 +23,7 @@
 		<td th:text="${album.songs}"></td>
 		<td th:text="${album.year}"></td>
 		<td th:text="${album.genre.name}"></td>
+		<td th:text="${album.review.name}"></td>
 		<td><a th:href ="@{/delete/{id}(id=${album.id})}">Delete</a></td>
 		<td><a th:href ="@{/edit/{id}(id=${album.id})}">Edit</a></td>
 			

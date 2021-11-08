@@ -20,6 +20,10 @@
 						<select th:field="*{genre}" class="form-control">
 							<option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
 						</select>
+		<tr><td>Rate: </td><td>
+						<select th:field="*{review}" class="form-control">
+							<option th:each="review: ${review}" th:value="${review.reviewId}" th:text="${review.name}"></option>
+						</select>
 			
 		</tbody>
 	</table>	

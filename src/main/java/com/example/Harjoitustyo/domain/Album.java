@@ -24,6 +24,11 @@ public class Album {
 	@JsonIgnoreProperties("albums")
 	private Genre genre;
 
+	@ManyToOne
+	@JoinColumn(name = "reviewId")
+	@JsonIgnoreProperties("albums")
+	private Review review;
+
 	public Album() {
 		super();
 		this.title = null;
@@ -31,15 +36,25 @@ public class Album {
 		this.songs = 0;
 		this.year = 0;
 		this.genre = null;
+		this.review = null;
 	}
 
-	public Album(String title, String artist, int songs, int year, Genre genre) {
+	public Album(String title, String artist, int songs, int year, Genre genre, Review review) {
 		super();
 		this.title = title;
 		this.artist = artist;
 		this.songs = songs;
 		this.year = year;
 		this.genre = genre;
+		this.review = review;
+	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
 	}
 
 	public Genre getGenre() {
