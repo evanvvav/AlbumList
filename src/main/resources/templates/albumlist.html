@@ -4,19 +4,37 @@
     <title>Albums</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    
 </head>
 <body>
-	<h1> Albums</h1>
-	<table>	
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #34283e"> 
+	<div class="navbar-brand">Album List 📋</div>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	<div class="navbar-nav">
+	<a class="nav-item nav-link" href="/albumlist">Album List</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link" href="/add">Add Album</a>
+	<form th:action="@{/logout}" method="post">
+		<input class="btn btn-outline-secondary" type="submit" value="Sign out"/>
+	</form>
+	</div>
+	</div>
+	
+	
+	</nav>
+	
+	<table class="table table-striped">	
 		<tbody>
-			<tr>
+			<tr >
 			<th>Title</th>
 			<th>Artist</th>
 			<th>Songs</th>
 			<th>Year</th>
 			<th>Genre</th>
 			<th>Rate</th>
-			<tr/>	
+			<th>Review</th>
+			<th></th>
+			<th></th>
+			<tr/>
 		<tr th:each = "album : ${albums}">
 		<td th:text="${album.title}"></td>
 		<td th:text="${album.artist}"></td>
@@ -24,13 +42,15 @@
 		<td th:text="${album.year}"></td>
 		<td th:text="${album.genre.name}"></td>
 		<td th:text="${album.review.name}"></td>
-		<td><a th:href ="@{/delete/{id}(id=${album.id})}">Delete</a></td>
-		<td><a th:href ="@{/edit/{id}(id=${album.id})}">Edit</a></td>
-			
+		<td th:text="${album.note}"></td>
+
+		<td><a sec:authorize="hasAuthority('ADMIN')" th:href ="@{/edit/{id}(id=${album.id})}"  class="btn btn-outline-secondary">Edit</a></td>
+		<td><a sec:authorize="hasAuthority('ADMIN')" th:href ="@{/delete/{id}(id=${album.id})}" class="btn btn-outline-warning">Delete</a></td>
+
 			<tr/>
 		</tbody>
 	</table>	
-		<a href="/add">Add Album</a>
+		
 
 			
 	

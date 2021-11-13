@@ -4,15 +4,28 @@
     <title>Albums</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #34283e"> 
+	<div class="navbar-brand">Edit Album 📋</div>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	<div class="navbar-nav">
+	<a class="nav-item nav-link" href="/albumlist">Album List</a>
+	<a class="nav-item nav-link" href="/add">Add Album</a>
+	<a class="nav-item nav-link " href="/add" >Log Out</a>
+	</div>
+	</div>
+	
+	
+	</nav>
 
-	<h1> Add/Edit album </h1>
 	<form th:object="${album}" th:action="@{/save}" action="#" method="post">
-	<table>	
+	<table class="table">	
 		<tbody>
 		<input type="hidden" th:field="${album.id}"/>
-		<tr><td>Title: </td><td><input type="text" th:field="${album.title}" /></td></tr>
+		<tr><td>Title: </td><td>
+		<input type="text" th:field="${album.title} " aria-label="Small" aria-describedby="inputGroup-sizing-sm" /></td></tr>
 		<tr><td>Artist: </td><td><input type="text" th:field="${album.artist}" /></td></tr>
 		<tr><td>Songs: </td><td><input type="text" th:field="${album.songs}" /></td></tr>
 		<tr><td>Year: </td><td><input type="text" th:field="${album.year}" /></td></tr>
@@ -24,10 +37,18 @@
 						<select th:field="*{review}" class="form-control">
 							<option th:each="review: ${review}" th:value="${review.reviewId}" th:text="${review.name}"></option>
 						</select>
+		<tr><td>Review: </td><td>
+		<textarea name="comment" cols="40" rows="3" th:field="${album.note}"></textarea>
+	
+		<tr><td><input type="submit" value="Save" class="btn btn-outline-secondary"/>
+		<a  class="btn btn-outline-warning"  href="/albumlist">Cancel</a>
+		
+		</td><td>
+		
 			
 		</tbody>
 	</table>	
-	<input type="submit" value="Save"/>
+	
 	</form>
 			
 	

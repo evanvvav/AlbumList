@@ -17,7 +17,7 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long reviewId;
 	private String name;
-//	private String note;
+	// private String note;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
 	@JsonIgnoreProperties("review")
@@ -53,9 +53,7 @@ public class Review {
 
 	/*
 	 * public String getNote() { return note; }
-	 */
-
-	/*
+	 * 
 	 * public void setNote(String note) { this.note = note; }
 	 */
 

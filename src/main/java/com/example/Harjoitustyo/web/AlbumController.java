@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class AlbumController {
 
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/add")
 	public String addAlbum(Model model) {
 		model.addAttribute("album", new Album());
@@ -60,6 +62,7 @@ public class AlbumController {
 
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteAlbum(@PathVariable("id") Long albumId) {
 		repository.deleteById(albumId);
@@ -67,6 +70,7 @@ public class AlbumController {
 
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}")
 	public String editBook(@PathVariable("id") Long albumId, Model model) {
 		model.addAttribute("album", repository.findById(albumId));
@@ -79,6 +83,11 @@ public class AlbumController {
 	public String save(Album album) {
 		repository.save(album);
 		return "redirect:/albumlist";
+	}
+
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
 	}
 
 }

@@ -18,6 +18,7 @@ public class Album {
 	private String artist;
 	private int songs;
 	private int year;
+	private String note;
 
 	@ManyToOne
 	@JoinColumn(name = "genreId")
@@ -37,9 +38,10 @@ public class Album {
 		this.year = 0;
 		this.genre = null;
 		this.review = null;
+		this.note = null;
 	}
 
-	public Album(String title, String artist, int songs, int year, Genre genre, Review review) {
+	public Album(String title, String artist, int songs, int year, Genre genre, Review review, String note) {
 		super();
 		this.title = title;
 		this.artist = artist;
@@ -47,6 +49,7 @@ public class Album {
 		this.year = year;
 		this.genre = genre;
 		this.review = review;
+		this.note = note;
 	}
 
 	public Review getReview() {
@@ -103,6 +106,14 @@ public class Album {
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	@Override
