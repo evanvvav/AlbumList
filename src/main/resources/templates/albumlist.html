@@ -4,18 +4,40 @@
     <title>Albums</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#locales").change(function () {
+        var selectedOption = $('#locales').val();
+        if (selectedOption != ''){
+            window.location.replace('albumlist?lang=' + selectedOption);
+        }
+    });
+});
+</script>
     
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #34283e"> 
-	<div class="navbar-brand">Album List 📋</div>
+	<div class="navbar-brand">Albums List 📋</div>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	<div class="navbar-nav">
-	<a class="nav-item nav-link" href="/albumlist">Album List</a>
-	<a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link" href="/add">Add Album</a>
-	<form th:action="@{/logout}" method="post">
-		<input class="btn btn-outline-secondary" type="submit" value="Sign out"/>
-	</form>
+	<a class="nav-item nav-link" href="/albumlist" th:text="#{albumslist}"></a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link" href="/add" th:text="#{addalbum}"></a>
+	<a class="nav-item nav-link" href="/login" th:text="#{signout}"></a>
+	
+	<!--<form th:action="@{/logout}" method="post" >
+		<input class="btn btn-outline-secondary" type="submit" value="Sign out" th:text="#{signout}"/>
+	</form>-->
+	<div class="nav-item nav-link">
+		<span th:text="#{lang.change}" ></span>:
+		<select id="locales" >
+   		 		<option value=""></option>
+  		  		<option value="en" th:text="#{lang.en}"></option>
+   				<option value="fi" th:text="#{lang.fi}"></option>
+		</select>
+	</div>
 	</div>
 	</div>
 	
@@ -25,13 +47,13 @@
 	<table class="table table-striped">	
 		<tbody>
 			<tr >
-			<th>Title</th>
-			<th>Artist</th>
-			<th>Songs</th>
-			<th>Year</th>
+			<th th:text="#{title}"></th>
+			<th th:text="#{artist}"></th>
+			<th th:text="#{songs}"></th>
+			<th th:text="#{year}"></th>
 			<th>Genre</th>
-			<th>Rate</th>
-			<th>Review</th>
+			<th th:text="#{rate}"></th>
+			<th th:text="#{review}"></th>
 			<th></th>
 			<th></th>
 			<tr/>
@@ -44,8 +66,8 @@
 		<td th:text="${album.review.name}"></td>
 		<td th:text="${album.note}"></td>
 
-		<td><a sec:authorize="hasAuthority('ADMIN')" th:href ="@{/edit/{id}(id=${album.id})}"  class="btn btn-outline-secondary">Edit</a></td>
-		<td><a sec:authorize="hasAuthority('ADMIN')" th:href ="@{/delete/{id}(id=${album.id})}" class="btn btn-outline-warning">Delete</a></td>
+		<td><a th:text="#{edit}" sec:authorize="hasAuthority('ADMIN')" th:href ="@{/edit/{id}(id=${album.id})}"  class="btn btn-outline-secondary"></a></td>
+		<td><a th:text="#{delete}" sec:authorize="hasAuthority('ADMIN')" th:href ="@{/delete/{id}(id=${album.id})}" class="btn btn-outline-warning"></a></td>
 
 			<tr/>
 		</tbody>

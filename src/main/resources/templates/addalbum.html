@@ -4,16 +4,40 @@
     <title>Albums</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#locales").change(function () {
+        var selectedOption = $('#locales').val();
+        if (selectedOption != ''){
+            window.location.replace('add?lang=' + selectedOption);
+        }
+    });
+});
+</script>
     
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #34283e"> 
-	<div class="navbar-brand">Edit Album 📋</div>
+	<div class="navbar-brand">Albums List 📋</div>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	<div class="navbar-nav">
-	<a class="nav-item nav-link" href="/albumlist">Album List</a>
-	<a class="nav-item nav-link" href="/add">Add Album</a>
-	<a class="nav-item nav-link " href="/add" >Log Out</a>
+	<a class="nav-item nav-link" href="/albumlist" th:text="#{albumslist}"></a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link" href="/add" th:text="#{addalbum}"></a>
+	<a class="nav-item nav-link" href="/login" th:text="#{signout}"></a>
+	
+	<!--<form th:action="@{/logout}" method="post" >
+		<input class="btn btn-outline-secondary" type="submit" value="Sign out" th:text="#{signout}"/>
+	</form>-->
+	<div class="nav-item nav-link">
+		<span th:text="#{lang.change}" ></span>:
+		<select id="locales" >
+   		 		<option value=""></option>
+  		  		<option value="en" th:text="#{lang.en}"></option>
+   				<option value="fi" th:text="#{lang.fi}"></option>
+		</select>
+	</div>
 	</div>
 	</div>
 	
@@ -24,24 +48,25 @@
 	<table class="table">	
 		<tbody>
 		<input type="hidden" th:field="${album.id}"/>
-		<tr><td>Title: </td><td>
+		<tr ><td th:text="#{title}"></td><td>
 		<input type="text" th:field="${album.title} " aria-label="Small" aria-describedby="inputGroup-sizing-sm" /></td></tr>
-		<tr><td>Artist: </td><td><input type="text" th:field="${album.artist}" /></td></tr>
-		<tr><td>Songs: </td><td><input type="text" th:field="${album.songs}" /></td></tr>
-		<tr><td>Year: </td><td><input type="text" th:field="${album.year}" /></td></tr>
+		<tr><td th:text="#{artist}"></td><td><input type="text" th:field="${album.artist}" /></td></tr>
+		<tr><td th:text="#{songs}"></td><td><input type="text" th:field="${album.songs}" /></td></tr>
+		<tr><td th:text="#{year}"></td><td><input type="text" th:field="${album.year}" /></td></tr>
 		<tr><td>Genre: </td><td>
 						<select th:field="*{genre}" class="form-control">
 							<option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
 						</select>
-		<tr><td>Rate: </td><td>
+		<tr><td th:text="#{rate}"></td><td>
 						<select th:field="*{review}" class="form-control">
 							<option th:each="review: ${review}" th:value="${review.reviewId}" th:text="${review.name}"></option>
 						</select>
-		<tr><td>Review: </td><td>
+		<tr><td th:text="#{review}"></td><td>
 		<textarea name="comment" cols="40" rows="3" th:field="${album.note}"></textarea>
 	
-		<tr><td><input type="submit" value="Save" class="btn btn-outline-secondary"/>
-		<a  class="btn btn-outline-warning"  href="/albumlist">Cancel</a>
+		<tr><td>
+		<input type="submit" value="Save" class="btn btn-outline-secondary"/>
+		<a  th:text="#{cancel}" class="btn btn-outline-warning"  href="/albumlist"></a>
 		
 		</td><td>
 		

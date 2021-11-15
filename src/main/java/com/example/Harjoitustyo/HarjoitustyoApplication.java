@@ -77,5 +77,6 @@ public class HarjoitustyoApplication {
 			UserRepository.save(user2);
 
 		};
+
 	}
 }
