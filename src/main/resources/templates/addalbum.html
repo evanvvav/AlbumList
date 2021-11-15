@@ -25,11 +25,11 @@ $(document).ready(function() {
 	<div class="navbar-nav">
 	<a class="nav-item nav-link" href="/albumlist" th:text="#{albumslist}"></a>
 	<a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link" href="/add" th:text="#{addalbum}"></a>
-	<a class="nav-item nav-link" href="/login" th:text="#{signout}"></a>
+	<!--<a class="nav-item nav-link" href="/login" th:text="#{signout}"></a>-->
 	
-	<!--<form th:action="@{/logout}" method="post" >
+	<form th:action="@{/logout}" method="post" >
 		<input class="btn btn-outline-secondary" type="submit" value="Sign out" th:text="#{signout}"/>
-	</form>-->
+	</form>
 	<div class="nav-item nav-link">
 		<span th:text="#{lang.change}" ></span>:
 		<select id="locales" >
